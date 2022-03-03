@@ -1,10 +1,14 @@
 
-import {
-  Flight
-} from '../models/flight.js';
+import {  Flight } from '../models/flight.js';
 
-function newFlights(req, res) {
-  res.render('flights/new');
+function newFlight(req, res) {
+  const newFlight = new Flight();
+  const dt = newFlight.departs;
+  const departsDate = dt.toISOString().slice(0, 16);
+  res.render("flights/new", {
+    departsDate,
+    title: "Add Flight",
+  });
 }
 
 function create(req, res) {
@@ -18,6 +22,11 @@ function create(req, res) {
   });
 }
 
+function update(req, res) {
+  Flight.findByIdAndUpdate(req.params.id, req.body, function (err, flight) {
+    res.redirect(`/flights/${flight._id}`);
+  });
+}
 
 function show(req, res) {
   Flight.findById(req.params.id, function (err, flight) {
@@ -28,19 +37,39 @@ function show(req, res) {
   });
 }
 
+function deleteFlight(req, res) {
+  Flight.findByIdAndDelete(req.params.id, function (err, flight) {
+    res.redirect("/flights");
+  });
+}
+
 
 function index(req, res) {
   Flight.find({}, function (error, flights) {
-    res.render("flights/", {
+    res.render("flights/index", {
       error: error,
       flights: flights,
-    })
-  })
+      title: "All Flights",
+    });
+  });
+}
+
+function edit(req, res) {
+  Flight.findById(req.params.id, function (err, flight) {
+    res.render("flights/edit", {
+      flight,
+      err,
+      title: "Edit Your Flight",
+    });
+  });
 }
 
 export {
-  newFlights as new,
+  newFlight as new,
   create,
   index,
   show,
+  deleteFlight as delete,
+  update,
+  edit,
 }
