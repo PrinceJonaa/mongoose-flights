@@ -22,8 +22,9 @@ const flightSchema = new Schema ({
     default: function() {
       return Date.now() + 365*24*60*60000
   }}
-}
-);
+}, {
+  timestamps: true
+});
 
 
 const Flight = mongoose.model("Flight", flightSchema);
