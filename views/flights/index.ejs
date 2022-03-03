@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/stylesheets/style.css">
-  <title>Big Flights</title>
-</head>
-<body>
+<%- include('../partials/html-head') %>
+<link rel="stylesheet" href="/stylesheets/flights/index.css">
+<%- include('../partials/nav') %>
+
   <h1>Flight List</h1>
   <table>
     <thead>
@@ -25,9 +19,16 @@
         <td><%= flight.airport %></td>
         <td><%= flight.airline %></td>
         <td><%= flight.departs %></td>
+        <td>
+          <form action="/flights/<%= flight._id %>?_method=DELETE" method="POST">
+            <button>Delete</button>
+          </form>
+        </td>
+        <td><a href="/flights/<%= flight._id %>">Details</a></td>
       </tr>
       <% }) %>
     </tbody>
-    </table>
-</body>
-</html>
+  </table>
+  <a href="/flights/new">Make a new Flight</a>
+
+<%- include('../partials/footer') %>
