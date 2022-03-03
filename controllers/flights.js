@@ -10,9 +10,9 @@ function create(req,res){
   }
 }
 
-const flight = new Flight(req.body);
-
-  flight.save(function(err) {
+const flight = new Flight(req.body)
+  
+flight.save(function(err) {
     if (err) return res.redirect('flights/new');
     res.redirect('/flights');
   });

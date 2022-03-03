@@ -8,8 +8,27 @@
   <title><%= title %></title>
 </head>
 <body>
-
-  <h1><%= title %></h1>
+  <h1>Movie List</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Flight Number</th>
+        <th>Airport</th>
+        <th>Airline</th>
+        <th>Departing</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% flights.forEach(flight => { %>
+      <tr>
+        <td><%= flight.flightNo %></td>
+        <td><%= flight.airport %></td>
+        <td><%= flight.airline %></td>
+        <td><%= flight.departs %></td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
   <a href="/flights/new"> Add New Flight </a>
 </body>
 </html>
