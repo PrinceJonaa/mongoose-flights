@@ -1,0 +1,17 @@
+<%- include("../partials/html-head") %>
+<%- include("../partials/nav") %>
+
+<section>
+  <h1><%= title %></h1>
+    <select>
+      <% meals.forEach(function(meal) { %>
+      <option><%= meal.name %></option>
+      <% }) %>
+    </select>
+
+      <form id="addmeal" action="/meals" method="POST">
+        <label for="meal-name">Name:</label>
+        <input type="text" name="name" id="mealname">
+        <button type="submit"> Add Meal </button>
+      </form>
+</section>
